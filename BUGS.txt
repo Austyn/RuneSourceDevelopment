@@ -1,0 +1,7 @@
+- Random -
+Banking doesn't let you withdrawl if you have no space, but have stackable item in inv your withdrawling.
+When spamming chatbox fastly, not all sent chats show up to all players, only the player that sent them.
+Adding values to character file after creating a character file makes it not be able to load.
+
+- Fishing -
+If level increases to a level that allows you to fish two types of fish at a spot while fishing at said spot, you have to reclick to be able to catch it.
