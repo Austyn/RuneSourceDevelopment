@@ -3,6 +3,7 @@ package com.rs2.model.content.combat;
 import com.rs2.model.players.Player;
 import com.rs2.model.players.ItemManager;
 import com.rs2.model.content.combat.magic.SpellDefinition;
+import com.rs2.model.content.combat.util.Skulling;
 import com.rs2.model.npcs.Npc;
 import com.rs2.model.Entity;
 import com.rs2.model.World;
@@ -88,6 +89,8 @@ public class Combat {
 					[player.getMagic().getMagicIndex()].getEndGraphicId(), 0);
 			}
 			resetAfterAttack(attacker);
+			if (attacker instanceof Player)
+				Skulling.skullEntity(attacker, attacker.getCombatingEntity());
 		}
 		if (attacker.getHitDelayTimer() != -1)
 			attacker.setHitDelayTimer(attacker.getHitDelayTimer() - 1);

@@ -144,11 +144,13 @@ public class Player extends Entity {
 	private boolean appearanceUpdateRequired;
 	private int prayerIcon = -1;
 	private int skullIcon = -1;
+	private int skullTimer = -1;
 	private boolean[] isUsingPrayer = new boolean[26];
 	private int prayerDrainTimer;
 	private double prayerPoints;
 	private MagicBookTypes magicBookType = MagicBookTypes.MODERN;
 	private boolean autoRetaliate = false;
+	private boolean isSkulled = false;
 	private int screenBrightness = 2;
 	private int mouseButtons = 0;
 	private int chatEffects = 1;
@@ -231,8 +233,14 @@ public class Player extends Entity {
 		getFollowing().followTick(this);
 		getCombat().combatTick(this);
 		movementHandler.process();
-		if (prayerDrainTimer > 0) {
+		if (prayerDrainTimer > 0)
 			prayerDrainTimer --;
+		if (skullTimer > -1)
+			skullTimer --;
+		if (skullTimer == 0) {
+			setSkulled(false);
+			for (int i = 0; i < 30; i++)
+				setEngagedEntity(i, null);
 		}
 	}
 	
@@ -1221,7 +1229,24 @@ public class Player extends Entity {
 	public int getPrayerIcon() {
 		return prayerIcon;
 	}
+	
+	public void setSkulled(boolean isSkulled) {
+		this.isSkulled = isSkulled;
+		setAppearanceUpdateRequired(true);
+	}
 
+	public boolean isSkulled() {
+		return isSkulled;
+	}
+
+	public void setSkullTimer(int skullTimer) {
+		this.skullTimer = skullTimer;
+	}
+
+	public int getSkullTimer() {
+		return skullTimer;
+	}
+	
 	public void setSkullIcon(int skullIcon) {
 		this.skullIcon = skullIcon;
 	}

@@ -90,8 +90,9 @@ public class Prayer {
 				level = (Integer) data[3];
 			}
 		}
-		if (player.getSkill().getLevelForXP(5) < level) {
-			player.getActionSender().sendMessage("You need a prayer level of at least " + level + " to use " + name);
+		if (player.getSkill().getLevel()[5] < level) {
+			player.getActionSender().sendMessage("You need a prayer level of at least " + level + " to use " + name + ".");
+			player.getActionSender().sendConfig(config, 0);
 			return;
 		}
 		if (player.getSkill().getLevel()[5] <= 0) {

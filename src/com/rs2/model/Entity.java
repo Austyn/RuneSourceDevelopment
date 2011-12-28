@@ -14,6 +14,7 @@ public abstract class Entity {
 	private Entity interactingEntity;
 	private Entity combatingEntity;
 	private Entity followingEntity;
+	private Entity[] engagedEntity = new Entity[30];
 	private Entity target;
 	private boolean isDead;
 	private boolean instigatingAttack;
@@ -239,6 +240,14 @@ public abstract class Entity {
 
 	public Entity getFollowingEntity() {
 		return followingEntity;
+	}
+	
+	public void setEngagedEntity(int i, Entity engagedEntity) {
+		this.engagedEntity[i] = engagedEntity;
+	}
+
+	public Entity getEngagedEntity(int i) {
+		return engagedEntity[i];
 	}
 	
 	public enum AttackTypes {

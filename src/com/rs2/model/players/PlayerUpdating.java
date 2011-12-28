@@ -129,8 +129,9 @@ public final class PlayerUpdating {
 		StreamBuffer.OutBuffer block = StreamBuffer.newOutBuffer(128);
 
 		block.writeByte(player.getGender()); // Gender
-		block.writeByte(0);
-		//block.writeByte(-1);
+		
+		block.writeByte(player.isSkulled() ? 0 : -1); //Skulling icon
+		block.writeByte(player.getPrayerIcon()); //Prayer icons
 		
 		// Hat.
 		if (player.getEquipment().getItemContainer().isSlotUsed(Constants.EQUIPMENT_SLOT_HEAD)) {
@@ -194,19 +195,6 @@ public final class PlayerUpdating {
 
 		// Head (with a hat already on).
 		Item helm = player.getEquipment().getItemContainer().get(Constants.EQUIPMENT_SLOT_HEAD);
-		/*if (helm != null) {
-			if (!Equipment.isFullMask(helm.getId()) && !Equipment.isFullHelm(helm.getId())) {
-				block.writeShort(0x100 + player.getAppearance()[Constants.APPEARANCE_SLOT_HEAD]);
-			} else {
-				block.writeByte(0);
-			}
-		} else {
-			if(player.getGender() == Constants.GENDER_MALE) {
-				block.writeShort(0x100 + player.getAppearance()[Constants.APPEARANCE_SLOT_BEARD]);
-			} else {
-				block.writeByte(0);
-			}
-		}*/
 		if (helm != null) {
 			if (!Equipment.isFullMask(helm.getId()) && !Equipment.isFullHelm(helm.getId())) {
 				block.writeShort(0x100 + player.getAppearance()[Constants.APPEARANCE_SLOT_HEAD]);
@@ -244,7 +232,6 @@ public final class PlayerUpdating {
 			} else {
 				block.writeByte(0);
 			}
-			//block.writeShort(0x100 + player.getAppearance()[Constants.APPEARANCE_SLOT_BEARD]);
 		}
 
 		// Player colors
